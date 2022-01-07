@@ -109,14 +109,7 @@ public class Client
 	 * Retourne tous les clients créés.
 	 * @return une copie de la liste de tous les clients.
 	 */
-	public static List<Client> tous()
-	{
-		List<Client> clients_list = new ArrayList<Client>();
-		for (int i = 0; i < clients.size(); i++)
-			clients_list.add(clients.get(i));
-		return clients_list;
-	}
-	
+
 	/**
 	 * Supprime le client.
 	 */
@@ -127,3 +120,14 @@ public class Client
 	}
 }
 
+
+
+/*public static List<Client> tous()
+	{
+
+		List<Client> clients_list = new ArrayList<Client>();
+		for (int i = 0; i < clients.size(); i++)
+			clients_list.add(clients.get(i));
+		return clients_list;
+	}
+	*/
