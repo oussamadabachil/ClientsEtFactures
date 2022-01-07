@@ -1,10 +1,16 @@
+
 package metier;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Client
 {
+	private String nom;
+	private List<Facture> factures = new ArrayList<>();
+	private static List<Client> clients = new ArrayList<>();
+
 	/** 
 	 * Crée un client.
 	 * @param nom le nom du client. 
@@ -12,6 +18,10 @@ public class Client
 	
 	public Client(String nom)
 	{
+		
+		this.nom = nom;
+		clients.add(this);
+
 	}
 
 	/**
@@ -21,7 +31,7 @@ public class Client
 	
 	public String getNom()
 	{
-		return null;
+		return nom;
 	}
 	
 	/**
@@ -31,6 +41,7 @@ public class Client
 	
 	public void setNom(String nom)
 	{
+		this.nom = nom;
 	}
 	
 	/**
@@ -39,9 +50,13 @@ public class Client
 	 * @return la facture créée.
 	 */
 	
-	public Facture createFacture(int montant)
+	public Facture createFacture(int montant,boolean reglee)
 	{
-		return null;
+		if (montant <= 0) {
+			System.out.println("Le montant d'une facture ne peut pas être négatif.");
+		}
+	
+		return createFacture(montant,false);
 	}
 	
 	/**
@@ -51,7 +66,15 @@ public class Client
 
 	public List<Facture> getFactures()
 	{
-		return null;
+		List<Facture> facturesReglees = new ArrayList<>();
+		
+		for (Facture facture : factures)
+			if(facture.estReglee())
+				facturesReglees.add(facture);
+				
+	
+				
+		return facturesReglees;
 	}
 	
 	/**
@@ -61,7 +84,11 @@ public class Client
 	
 	public int sommeMontants()
 	{
-		return 0;
+		int montant = 0;
+		
+		for(Facture facture:factures)
+			montant += facture.getMontant();
+		return montant;
 	}
 
 	/**
@@ -70,22 +97,13 @@ public class Client
 	 * @param reglée Vrai si la facture est reglée.
 	 * @return la facture créée.
 	 */
-	
-	public Facture createFacture(int montant, boolean reglee)
-	{
-		return null;
-	}	
+
 	
 	/**
 	 * Retourne la liste des factures reglées. 
 	 * @return la liste des factures reglées.
 	 */
 
-	public List<Facture> facturesReglees()
-	{
-		return null;
-	}
-	
 
 	/**
 	 * Retourne tous les clients créés.
@@ -93,7 +111,10 @@ public class Client
 	 */
 	public static List<Client> tous()
 	{
-		return null;
+		List<Client> clients_list = new ArrayList<Client>();
+		for (int i = 0; i < clients.size(); i++)
+			clients_list.add(clients.get(i));
+		return clients_list;
 	}
 	
 	/**
@@ -102,5 +123,7 @@ public class Client
 	
 	public void delete()
 	{
+		clients.remove(this);
 	}
 }
+
